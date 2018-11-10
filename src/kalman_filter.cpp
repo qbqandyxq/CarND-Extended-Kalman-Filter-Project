@@ -56,12 +56,12 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
   */
     double rho = sqrt(x_(0) * x_(0) + x_(1) * x_(1));
     double phi = atan2(x_(1), x_(0));
-    double rho_dot = (x_(0)*x_(2) + x_(1)*x_(3))/rho;
-    //if (fabs(rho) < 0.0001) {
-    //   rho_dot = 0;
-    //} else {
-    //    rho_dot = (x_(0) * x_(2) + x_(1) * x_(3)) / rho;
-    //}
+    double rho_dot; //= (x_(0)*x_(2) + x_(1)*x_(3))/rho;
+    if (fabs(rho) < 0.0001) {
+       rho_dot = 0;
+    } else {
+        rho_dot = (x_(0) * x_(2) + x_(1) * x_(3)) / rho;
+    }
     //create a function for predictions
     VectorXd z_pred(3);
     z_pred << rho, phi, rho_dot;
@@ -74,7 +74,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
         if(y(1) > M_PI){
             y(1) -= (M_PI);
         }else{
-            y91) += (M_PI);
+            y(1) += (M_PI);
         }
     }
     
