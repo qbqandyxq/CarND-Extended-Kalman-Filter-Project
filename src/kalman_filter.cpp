@@ -79,8 +79,8 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
     }
     
     //calculate matices
-    MatrixXd PHt = P_ * Ht;
     MatrixXd Ht = H_.transpose();
+    MatrixXd PHt = P_ * Ht;
     MatrixXd S = H_ * PHt + R_;
     MatrixXd Si = S.inverse();
     MatrixXd K = PHt * Si;
