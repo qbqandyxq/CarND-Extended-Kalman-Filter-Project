@@ -45,19 +45,18 @@ int main()
 
     if (length && length > 2 && data[0] == '4' && data[1] == '2')
     {
-
+    
       auto s = hasData(std::string(data));
       if (s != "") {
       	
         auto j = json::parse(s);
 
         std::string event = j[0].get<std::string>();
-        
         if (event == "telemetry") {
           // j[1] is the data JSON object
           
           string sensor_measurment = j[1]["sensor_measurement"];
-          
+          cout<< sensor_measurment<<endl;
           MeasurementPackage meas_package;
           istringstream iss(sensor_measurment);
     	  long long timestamp;
